@@ -16,7 +16,7 @@ client = discord.Client()
 # 起動時に動作する処理
 @client.event
 async def on_ready(): # 起動したら
-	chID = 607231209667297370 # 受付するチャンネルID(int)
+	chID = 630771316102004736 # 受付するチャンネルID(int)
 	channel = client.get_channel(chID)
 	await channel.send("受付を開始。さあ、開場だ！") # 起動ワードを発言
 
@@ -27,7 +27,7 @@ async def on_member_join(member): # 新規メンバーが参加してきたら
 
 @client.event
 async def on_message(message): # メッセージが送られたら
-	if message.channel.id == 607231209667297370 : # 受付チャットの発言にのみ反応
+	if message.channel.id == 630771316102004736 : # 受付チャットの発言にのみ反応
 		t = [
 		{'name':'a卓','rl':'中野','mem':['SanpaiMikan','gray_vb42','YuiooQa'],'uw_ch':607230283908907018,'za_ch':607230574767112194}, # A卓RL、参加者一覧、アンダーワークID、雑談ID
 		{'name':'b卓','rl':'ハニワ','mem':['plusmint','massujazeyo','NktAts'],'uw_ch':607230504290353152,'za_ch':607230631277101107}, # B卓RL、参加者一覧、アンダーワークID、雑談ID
