@@ -1,1 +1,1 @@
-bot: python reception.py
+discordbot: python reception.py
