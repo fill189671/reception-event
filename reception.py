@@ -14,16 +14,18 @@ TOKEN = os.environ['DISCORD_BOT_TOKEN']
 client = discord.Client()
 
 # 起動時に動作する処理
-@client.event
-async def on_ready(): # 起動したら
-	chID = 630771316102004736 # 受付するチャンネルID(int)
-	channel = client.get_channel(chID)
-	await channel.send("受付を開始。さあ、開場だ！") # 起動ワードを発言
+#@client.event
+#async def on_ready(): # 起動したら
+#	chID = 630771316102004736 # 受付するチャンネルID(int)
+#	channel = client.get_channel(chID)
+#	await channel.send("受付を開始。さあ、開場だ！") # 起動ワードを発言
 
 # 受付
 @client.event
 async def on_member_join(member): # 新規メンバーが参加してきたら
-	await message.channel.send(member.mention + 'ようこそニューロエイジへ！アンタのTwitterアカウントを教えてくれ。ただし＠マークは抜きでな。余計な文字も抜きで頼むぜ。（例：ONlineONly_TNX）') # 名前を訊く
+	chID = 630771316102004736 # 受付するチャンネルID(int)
+	channel = client.get_channel(chID)
+	await channel.send(member.mention + 'ようこそニューロエイジへ！アンタのTwitterアカウントを教えてくれ。ただし＠マークは抜きでな。余計な文字も抜きで頼むぜ。（例：ONlineONly_TNX）') # 名前を訊く
 
 @client.event
 async def on_message(message): # メッセージが送られたら
