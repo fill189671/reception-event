@@ -30,14 +30,10 @@ async def on_member_join(member): # 新規メンバーが参加してきたら
 @client.event
 async def on_message(message): # メッセージが送られたら
 	if message.channel.id == os.environ['DISCORD_CH_ID'] : # 受付チャットの発言にのみ反応
-		table = [
-		{'name':'A卓','rl':'RL名','mem':['参加者','参加者','参加者'],'uw_ch':アンダーワークID（int）,'za_ch':雑談ID（int）}, # A卓RL、参加者一覧、アンダーワークID、雑談ID
-		{'name':'B卓','rl':'RL名','mem':['参加者','参加者','参加者'],'uw_ch':アンダーワークID（int）,'za_ch':雑談ID（int）}, # B卓RL、参加者一覧、アンダーワークID、雑談ID
-		{'name':'C卓','rl':'RL名','mem':['参加者','参加者','参加者'],'uw_ch':アンダーワークID（int）,'za_ch':雑談ID（int）} # C卓RL、参加者一覧、アンダーワークID、雑談ID
-		]
+		table = [os.environ['TABLE_A'],os.environ['TABLE_B'],os.environ['TABLE_C'],os.environ['TABLE_D']] # 卓情報（herokuの環境変数に格納）
 		if client.user != message.author : # 送り主が自分自身でなければ
 			for t in table : #卓ごとの
-				if message.content in t['mem'] : #参加者名簿の名前に一致するものがあったら
+				if message.content in t['mem'] and message.content.startswith('@') != true : #@から始まらず、参加者名簿の名前に一致する内容だったら
 					role = discord.utils.get(message.guild.roles, name=str(t['name'])) #付与する役職を取得
 					await message.channel.send(message.author.mention + ' やあお友達、参加者名簿との確認が済んだぜ。アンタは{0}RLの{1}だな。以降は <#{2}>もしくは <#{3}> で{0}RLの指示に従ってくれ。GOOD LUCK！'.format(t['rl'],t['name'],t['uw_ch'],t['za_ch'])) # 受付メッセージを送信
 					await message.author.add_roles(role) # 新しい役職を付与
