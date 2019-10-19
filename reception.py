@@ -29,20 +29,15 @@ async def on_member_join(member): # 新規メンバーが参加してきたら
 
 @client.event
 async def on_message(message): # メッセージが送られたら
-	if message.channel.id == os.environ['DISCORD_CH_ID'] : # 受付チャットの発言にのみ反応
-		table = [os.environ['TABLE_A'],
-			 os.environ['TABLE_B'],
-			 os.environ['TABLE_C'],
-			 os.environ['TABLE_D']
-			] # 卓情報（herokuの環境変数に格納）
-		if client.user != message.author : # 送り主が自分自身でなければ
-			for t in table : #卓ごとの
-				if message.content in t['mem'] and message.content.startswith('@') != true : #@から始まらず、参加者名簿の名前に一致する内容だったら
-					role = discord.utils.get(message.guild.roles, name=str(t['name'])) #付与する役職を取得
-					await message.channel.send(message.author.mention + ' やあお友達、参加者名簿との確認が済んだぜ。アンタは{0}RLの{1}だな。以降は <#{2}>もしくは <#{3}> で{0}RLの指示に従ってくれ。GOOD LUCK！'.format(t['rl'],t['name'],t['uw_ch'],t['za_ch'])) # 受付メッセージを送信
-					await message.author.add_roles(role) # 新しい役職を付与
-					break # 一致したのでループを抜ける
-			else : # 全ての名簿と不一致だった場合
-				await message.channel.send(message.author.mention + ' Ooops！悪いなお友達、名簿の確認がうまくいかなかった。もう一度頼むぜ。') #もう一度入力してもらう
+	table = os.environ['EVENT_TABLE'] # 卓情報（herokuの環境変数に格納）
+	if message.channel.id == os.environ['DISCORD_CH_ID'] and client.user != message.author : # 受付チャットの発言、かつ送り主が自分自身でなければ
+		for t in table : #卓ごとの
+			if message.content in t['mem'] and message.content.startswith('@') != true : #@から始まらず、参加者名簿の名前に一致する内容だったら
+				role = discord.utils.get(message.guild.roles, name=str(t['name'])) #付与する役職を取得
+				await message.channel.send(message.author.mention + ' やあお友達、参加者名簿との確認が済んだぜ。アンタは{0}RLの{1}だな。以降は <#{2}>もしくは <#{3}> で{0}RLの指示に従ってくれ。GOOD LUCK！'.format(t['rl'],t['name'],t['uw_ch'],t['za_ch'])) # 受付メッセージを送信
+				await message.author.add_roles(role) # 新しい役職を付与
+				break # 一致したのでループを抜ける
+		else : # 全ての名簿と不一致だった場合
+			await message.channel.send(message.author.mention + ' Ooops！悪いなお友達、名簿の確認がうまくいかなかった。もう一度頼むぜ。') #もう一度入力してもらう
 # Botの起動とDiscordサーバーへの接続
 client.run(TOKEN)
