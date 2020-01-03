@@ -30,7 +30,11 @@ async def on_member_join(member): # 新規メンバーが参加してきたら
 @client.event
 async def on_message(message): # メッセージが送られたら
 	chID = int(os.environ['DISCORD_CH_ID']) # 受付するチャンネルID(int)
-	table = os.environ['EVENT_TABLE'] # 卓情報（herokuの環境変数に格納）
+	table = [{"name":"A卓","rl":"あるば","mem":["meganeoki_game","WaterMargin36","kokonoe0722","g_a_trpg"],"uw_ch":650660171613339658,"za_ch":650660422684508161},\
+{"name":"B卓","rl":"湊","mem":["psyka294","yuge_taro","liarnose","yakin3913"],"uw_ch":650660275178962974,"za_ch":650660455752269824},\
+{"name":"C卓","rl":"SONE","mem":["vankittea","SeleneRosedream","potechi_lja","gikoneko_24"],"uw_ch":650660304698605568,"za_ch":650660485070323714},\
+{"name":"D卓","rl":"ViVi","mem":["higecythe","Atai_marukyu","kinoakira","Sakoy_trpg"],"uw_ch":650660330518609920,"za_ch":650660508424208405},\
+{"name":"E卓","rl":"ソエジマ","mem":["yukaristos","straytalkie","dragoste_eu"],"uw_ch":650660357114691617,"za_ch":650660545308917783}] # 卓情報（herokuの環境変数に格納）
 	if message.channel.id ==chID and client.user != message.author : # 受付チャットの発言、かつ送り主が自分自身でなければ
 		for t in table : #卓ごとの
 			for m in t['mem'] : #各参加者リストの
