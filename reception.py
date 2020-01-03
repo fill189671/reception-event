@@ -14,11 +14,11 @@ TOKEN = os.environ['DISCORD_BOT_TOKEN']
 client = discord.Client()
 
 # 起動時に動作する処理
-#@client.event
-#async def on_ready(): # 起動したら
-#	chID = os.environ['DISCORD_CH_ID'] # 受付するチャンネルID(int)
-#	channel = client.get_channel(chID)
-#	await channel.send("受付を開始。さあ、開場だ！") # 起動ワードを発言
+@client.event
+async def on_ready(): # 起動したら
+	chID = os.environ['DISCORD_CH_ID'] # 受付するチャンネルID(int)
+	channel = client.get_channel(chID)
+	await channel.send("受付を開始。さあ、開場だ！") # 起動ワードを発言
 
 # 受付
 @client.event
