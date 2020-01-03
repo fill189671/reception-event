@@ -16,20 +16,20 @@ client = discord.Client()
 # 起動時に動作する処理
 @client.event
 async def on_ready(): # 起動したら
-	chID = os.environ['DISCORD_CH_ID'] # 受付するチャンネルID(int)
+	chID = int(os.environ['DISCORD_CH_ID']) # 受付するチャンネルID(int)
 	channel = client.get_channel(chID)
 	await channel.send("受付を開始。さあ、開場だ！") # 起動ワードを発言
 
 # 受付
 @client.event
 async def on_member_join(member): # 新規メンバーが参加してきたら
-	chID = os.environ['DISCORD_CH_ID'] # 受付するチャンネルID(int)
+	chID = int(os.environ['DISCORD_CH_ID']) # 受付するチャンネルID(int)
 	channel = client.get_channel(chID)
 	await channel.send(member.mention + 'ようこそニューロエイジへ！アンタのTwitterアカウントを教えてくれ。ただし＠マークは抜きでな。余計な文字も抜きで頼むぜ。（例：ONlineONly_TNX）') # 名前を訊く
 
 @client.event
 async def on_message(message): # メッセージが送られたら
-	chID = os.environ['DISCORD_CH_ID'] # 受付するチャンネルID(int)
+	chID = int(os.environ['DISCORD_CH_ID']) # 受付するチャンネルID(int)
 	table = os.environ['EVENT_TABLE'] # 卓情報（herokuの環境変数に格納）
 	if message.channel.id ==chID and client.user != message.author : # 受付チャットの発言、かつ送り主が自分自身でなければ
 		for t in table : #卓ごとの
