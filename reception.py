@@ -29,6 +29,7 @@ async def on_member_join(member): # 新規メンバーが参加してきたら
 
 @client.event
 async def on_message(message): # メッセージが送られたら
+	chID = os.environ['DISCORD_CH_ID'] # 受付するチャンネルID(int)
 	table = os.environ['EVENT_TABLE'] # 卓情報（herokuの環境変数に格納）
 	if message.channel.id == os.environ['DISCORD_CH_ID'] and client.user != message.author : # 受付チャットの発言、かつ送り主が自分自身でなければ
 		for t in table : #卓ごとの
