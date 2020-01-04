@@ -43,6 +43,7 @@ async def on_message(message): # メッセージが送られたら
 					await message.channel.send(message.author.mention + ' やあお友達、参加者名簿との確認が済んだぜ。アンタは{0}RLの{1}だな。以降は <#{2}>もしくは <#{3}> で{0}RLの指示に従ってくれ。GOOD LUCK！'.format(t['rl'],t['name'],t['uw_ch'],t['za_ch'])) # 受付メッセージを送信
 					await message.author.add_roles(role) # 新しい役職を付与
 					break # 一致したのでループを抜ける
+				break # 一致したのでループを抜ける
 		else : # 全ての名簿と不一致だった場合
 			await message.channel.send(message.author.mention + ' Ooops！悪いなお友達、名簿の確認がうまくいかなかった。もう一度頼むぜ。') #もう一度入力してもらう
 # Botの起動とDiscordサーバーへの接続
