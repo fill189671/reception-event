@@ -35,6 +35,7 @@ async def on_message(message): # メッセージが送られたら
 {"name":"C卓","rl":"SONE","mem":["vankittea","SeleneRosedream","potechi_lja","gikoneko_24"],"uw_ch":650660304698605568,"za_ch":650660485070323714},\
 {"name":"D卓","rl":"ViVi","mem":["higecythe","Atai_marukyu","kinoakira","Sakoy_trpg"],"uw_ch":650660330518609920,"za_ch":650660508424208405},\
 {"name":"E卓","rl":"ソエジマ","mem":["yukaristos","straytalkie","dragoste_eu"],"uw_ch":650660357114691617,"za_ch":650660545308917783}] # 卓情報（herokuの環境変数に格納）
+	flag = 'off' # 寝たフラグを作る
 	if message.channel.id ==chID and client.user != message.author : # 受付チャットの発言、かつ送り主が自分自身でなければ
 		for t in table : #卓ごとの
 			for m in t['mem'] : #各参加者リストの
@@ -42,7 +43,9 @@ async def on_message(message): # メッセージが送られたら
 					role = discord.utils.get(message.guild.roles, name=str(t['name'])) #付与する役職を取得
 					await message.channel.send(message.author.mention + ' やあお友達、参加者名簿との確認が済んだぜ。アンタは{0}RLの{1}だな。以降は <#{2}>もしくは <#{3}> で{0}RLの指示に従ってくれ。GOOD LUCK！'.format(t['rl'],t['name'],t['uw_ch'],t['za_ch'])) # 受付メッセージを送信
 					await message.author.add_roles(role) # 新しい役職を付与
+					flag = 'on' # フラグを立てる
 					break # 一致したのでループを抜ける
+			if flag == 'on' :
 				break # 一致したのでループを抜ける
 		else : # 全ての名簿と不一致だった場合
 			await message.channel.send(message.author.mention + ' Ooops！悪いなお友達、名簿の確認がうまくいかなかった。もう一度頼むぜ。') #もう一度入力してもらう
