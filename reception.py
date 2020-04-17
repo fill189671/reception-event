@@ -28,7 +28,7 @@ async def on_member_join(member): # 新規メンバーが参加してきたら
 	await channel.send(member.mention + 'ようこそニューロエイジへ！アンタのTwitterアカウントを教えてくれ。ただし＠マークは抜きでな。余計な文字も抜きで頼むぜ。（例：ONlineONly_TNX）') # 名前を訊く
 @client.event
 async def on_message(message): # メッセージが送られたら
-	chID = 590957330582208514 # 受付するチャンネルID(int)
+	chID = int(os.environ['DISCORD_CH_ID']) # 受付するチャンネルID(int)
 	msCh = client.get_channel(chID)
 	flag = 'off' # 寝たフラグを作る
 	table = [] # 卓リストを宣言
